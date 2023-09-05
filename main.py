@@ -5,12 +5,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sn
 import plotly.express as px
-import requests
 import streamlit.components.v1 as components
-from streamlit_elements import dashboard
-from streamlit_elements import elements, mui, html
 from streamlit import session_state as state
-from streamlit_elements import elements, sync, event
 from types import SimpleNamespace
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
@@ -19,10 +15,10 @@ import os
 from PIL import Image
 import subprocess
 
-st.set_page_config(page_title="General", page_icon="📊",layout='wide', initial_sidebar_state='expanded')
+st.set_page_config(page_title="Risk Control and Analysis", page_icon="📊",layout='wide', initial_sidebar_state='expanded')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-response = requests.post('https://riskanalysis-f9a284bc46f5.herokuapp.com/get_data')
+response = requests.post('https://riskanalysis.herokuapp.com/get_data')
 data = response.json()
 
 # Process and display the data
