@@ -18,7 +18,7 @@ import subprocess
 st.set_page_config(page_title="Risk Control and Analysis", page_icon="📊",layout='wide', initial_sidebar_state='expanded')
 st.set_option('deprecation.showPyplotGlobalUse', False)
 
-response = requests.post('https://riskanalysis.herokuapp.com/get_data')
+response = requests.post('http://127.0.0.1:5000/get_data')
 data = response.json()
 
 # Process and display the data
