@@ -55,7 +55,7 @@ with tab1:
         outer_cols = st.columns([1.5,1])
         with outer_cols[0]:
 
-            st.subheader("Count of Risk types")
+            st.subheader("Risk types")
             count = df.groupby('Risk type ')['Risk type '].count()
 
             fig_count = go.Figure(go.Indicator(
@@ -89,7 +89,7 @@ with tab1:
                     mode="gauge+number",
                     value=opportunity_count,
                     domain={'x': [0, 1], 'y': [0, 1]},
-                    title={'text': "Opportunity Count"},
+                    title={'text': "Opportunity"},
                     gauge={
                             'bar': {'color': "darkgreen"},
                             'threshold': {
@@ -113,7 +113,7 @@ with tab1:
                     mode="gauge+number",
                     value=threat_count,
                     domain={'x': [0, 1], 'y': [0, 1]},
-                    title={'text': "Threat Count"},
+                    title={'text': "Threat"},
                     gauge={
                             'bar': {'color': "darkred"},
                             'threshold': {
@@ -250,7 +250,7 @@ with tab1:
                         'y': 0.95, 
                         'xanchor': 'center',
                         'yanchor': 'top',
-                        'font': {'size': 30 , 'family': 'Arial', }
+                        'font': {'size': 30 }
                     }
                 )
                 st.plotly_chart(fig)
@@ -281,7 +281,7 @@ with tab2:
                 ))
                 fig_threat.update_layout(
                     width=400,
-                    height=330,
+                    height=310,
                 )
 
                 st.plotly_chart(fig_threat, use_container_width=True)
@@ -307,7 +307,7 @@ with tab2:
                 ))
                 fig_opportunity.update_layout(
                     width=400,
-                    height=330,
+                    height=310,
                 )
 
                 st.plotly_chart(fig_opportunity, use_container_width=True)
@@ -518,4 +518,6 @@ with tab3:
                         fig.update_layout(yaxis_tickformat=',')
                         fig.update_yaxes(range=[0, count_df['Opportunity Count'].max() + 1]) 
 
-                        st.plotly_chart(fig)                
+                        st.plotly_chart(fig)
+
+                                   
