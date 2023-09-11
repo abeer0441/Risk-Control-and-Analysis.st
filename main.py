@@ -24,11 +24,14 @@ data = response.json()
 # Process and display the data
 df = pd.read_json(data["df"])
 
-st.markdown("<h1 style='text-align: center; font-size: 60px;'>Analysis and Control Risks</h1>", unsafe_allow_html=True)
+st.markdown("<h1 style='text-align: center; font-size: 60px; color: black;'>Analysis and Control Risks</h1>", unsafe_allow_html=True)
 
-fieldset_style = "border: 1px dashed gray; align-items: center; padding: 10px; border-radius: 10px; width: 1100px; box-shadow: 2px 2px 5px black; background-color: #f7f7f7;"
-input_style = "border: none; padding: 5px; margin-left: 20px; margin-bottom: 5px; background-color: #f7f7f7; color: darkred; font-weight: bold;"
-label_style = "font-weight: bold; margin: 5px; padding: 10px"
+fieldset_style = "border: none; margin-left: 130px; padding: 10px; border-radius: 10px; width: 1100px;"
+input_style = "border: none; padding-left: 10px; position: relative; font-size: 16px; margin-bottom: 5px; border-radius:7px; background-color: #f7f7f7; color: black; font-weight: normal;"
+label_style = "font-weight: normal; font-size: 20px; margin: 5px; padding: 10px; color: navy;"
+divider_style = "border-top: 2px solid black; height: 2vh; margin-left: 20px; margin-bottom: 2px;"
+
+st.markdown(f"<div style='{divider_style}'></div>", unsafe_allow_html=True)
 
 components.html(f'''<form action="info" method="post">
     <fieldset style = "{fieldset_style}">
@@ -101,7 +104,7 @@ with tab1:
                 ))
                 fig_opportunity.update_layout(
                     width=200,
-                    height=330,
+                    height=328,
                     paper_bgcolor='#f7f7f7',
                 )
                 st.plotly_chart(fig_opportunity, use_container_width=True)
@@ -125,7 +128,7 @@ with tab1:
                 ))
                 fig_threat.update_layout(
                     width=200,
-                    height=330,
+                    height=328,
                     paper_bgcolor='#f7f7f7',
                 )
                 st.plotly_chart(fig_threat, use_container_width=True)
@@ -140,7 +143,7 @@ with tab1:
             )
             fig.update_layout(
                         width=500,
-                        height=450,
+                        height=458,
                         paper_bgcolor='#f7f7f7',
                         margin=dict(l=20, r=20, t=20, b=20),
                         #title={
@@ -238,11 +241,11 @@ with tab1:
                     y='Reason', 
                     template="plotly_dark",
                     orientation='h',
-                    color_discrete_sequence=px.colors.sequential.Viridis,
+                    color_discrete_sequence=px.colors.sequential.PuBuGn_r,
                 )
                 fig.update_layout(
-                    width=1300,
-                    height=400,
+                    width=1250,
+                    height=300,
                     paper_bgcolor='#f7f7f7',
                     title={
                         'text': "Reasons",
@@ -269,7 +272,7 @@ with tab2:
                 fig_threat.add_trace(go.Indicator(
                     mode="gauge+number",
                     value=risk_count,
-                    title={'text': "Threat High risk count"},
+                    title={'text': "Threat High risk"},
                     gauge={
                         'bar': {'color': "darkred"},
                         'threshold': {
@@ -281,7 +284,7 @@ with tab2:
                 ))
                 fig_threat.update_layout(
                     width=400,
-                    height=310,
+                    height=309,
                 )
 
                 st.plotly_chart(fig_threat, use_container_width=True)
@@ -295,7 +298,7 @@ with tab2:
                 fig_opportunity.add_trace(go.Indicator(
                     mode="gauge+number",
                     value=risk_count,
-                    title={'text': "Opportunity High risk count"},
+                    title={'text': "Opportunity High risk"},
                     gauge={
                         'bar': {'color': "darkgreen"},
                         'threshold': {
@@ -307,7 +310,7 @@ with tab2:
                 ))
                 fig_opportunity.update_layout(
                     width=400,
-                    height=310,
+                    height=309,
                 )
 
                 st.plotly_chart(fig_opportunity, use_container_width=True)
@@ -364,18 +367,14 @@ with tab2:
                     )
                     st.plotly_chart(fig)
 
-
             with st.container():
 
                 col1,col2 = st.columns(2)
                 with col1:
-                    count_df = df[df['Risk type '] == 'Threat'].groupby('Reasons').size().reset_index(name='Threat Count')
-                    fig = px.bar(count_df, x='Threat Count', y='Reasons', template="plotly_dark",
-                                width=1200, height=500, text='Threat Count', color_discrete_sequence=px.colors.sequential.Viridis)
+                    count_df = df[df['Risk type '] == 'Threat'].groupby('Reasons').size().reset_index(name='Threat')
+                    fig = px.bar(count_df, x='Threat', y='Reasons', template="plotly_dark",
+                                width=1200, height=300, text='Threat', color_discrete_sequence=px.colors.sequential.Viridis)
                     fig.update_traces(textposition='outside')
-                    fig.update_layout(yaxis_tickformat=',')
-                    fig.update_yaxes(range=[0, count_df['Threat Count'].max() + 1]) 
-
                     st.plotly_chart(fig)
 
         with tab2:
@@ -430,12 +429,10 @@ with tab2:
 
                 col1,col2 = st.columns([20,1])
                 with col1:
-                    count_df = df[df['Risk type '] == 'Opportunity'].groupby('Reasons').size().reset_index(name='Opportunity Count')
-                    fig = px.bar(count_df, x='Opportunity Count', y='Reasons', template="plotly_dark",
-                                width=1200, height=500, text='Opportunity Count', color_discrete_sequence=px.colors.sequential.Viridis)
+                    count_df = df[df['Risk type '] == 'Opportunity'].groupby('Reasons').size().reset_index(name='Opportunity')
+                    fig = px.bar(count_df, x='Opportunity', y='Reasons', template="plotly_dark",
+                                width=1200, height=300, text='Opportunity', color_discrete_sequence=px.colors.sequential.Viridis)
                     fig.update_traces(textposition='outside')
-                    fig.update_layout(yaxis_tickformat=',')
-                    fig.update_yaxes(range=[0, count_df['Opportunity Count'].max() + 1]) 
 
                     st.plotly_chart(fig)
 
