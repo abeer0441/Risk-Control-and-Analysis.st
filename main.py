@@ -104,7 +104,7 @@ with tab1:
                 ))
                 fig_opportunity.update_layout(
                     width=200,
-                    height=328,
+                    height=320,
                     paper_bgcolor='#f7f7f7',
                 )
                 st.plotly_chart(fig_opportunity, use_container_width=True)
@@ -128,7 +128,7 @@ with tab1:
                 ))
                 fig_threat.update_layout(
                     width=200,
-                    height=328,
+                    height=320,
                     paper_bgcolor='#f7f7f7',
                 )
                 st.plotly_chart(fig_threat, use_container_width=True)
@@ -284,7 +284,7 @@ with tab2:
                 ))
                 fig_threat.update_layout(
                     width=400,
-                    height=309,
+                    height=320,
                 )
 
                 st.plotly_chart(fig_threat, use_container_width=True)
@@ -310,7 +310,7 @@ with tab2:
                 ))
                 fig_opportunity.update_layout(
                     width=400,
-                    height=309,
+                    height=320,
                 )
 
                 st.plotly_chart(fig_opportunity, use_container_width=True)
